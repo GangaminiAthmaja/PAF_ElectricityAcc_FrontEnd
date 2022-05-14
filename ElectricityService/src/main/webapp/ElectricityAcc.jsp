@@ -90,7 +90,7 @@
 							class="btn btn-primary"
 						>
 
-						<input type="hidden" name="hidAccIDSave" id="hidAccIDSave" value="">
+						<input type="hidden" name="hidItemIDSave" id="hidItemIDSave" value="">
 						<br><br>
 					</form>
 				<div id="alertSuccess" class="alert alert-success"></div>

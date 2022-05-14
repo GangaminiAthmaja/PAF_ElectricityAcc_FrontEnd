@@ -3,14 +3,13 @@ package model;
 import java.sql.*;
 
 public class ElectricityAcc { // A common method to connect to the DB
-	private Connection connect() {
+	public Connection connect() {
 		Connection con = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 
 			// Provide the correct details: DBServer/DBName, username, password
 			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/paf", "root", "");
-			System.out.print("Successfully connected");
 		} catch (Exception e) 
 		{
 			e.printStackTrace();
@@ -175,66 +174,55 @@ public class ElectricityAcc { // A common method to connect to the DB
 		}
 		return output;
 	}
-	
-	//read a specific account
-		public String viewSpecificAccount(String AccountNo)
-		 {
-		 String output = "";
-		 try
-		 {
-		 Connection con = connect();
-		 if (con == null)
-		 {return "Error while connecting to the database for reading."; }
-		 
-		 // Prepare the html table to be displayed
-		 output = "<table border='1'><tr><th>Account Name</th><th>Account Number</th>" +
-		 "<th>Premises ID</th>" ;
-		
-//		 "<th>Payment</th><th>Last Bill</th>"+
-//		 "<th>Update</th><th>Remove</th></tr>";
-		 
-
-		 String query = "select * from electricity_account where accNumber='8865567800'";
-		 
-		 Statement stmt = con.createStatement();
-		 ResultSet rs = stmt.executeQuery(query);
-		 
-		 // iterate through the rows in the result set
-		 while (rs.next())
-		 {
-		 //String Account_number = Integer.toString(rs.getInt("accNumber"));
-		 String accName = rs.getString("accName");
-	     String accNumber = rs.getString("accNumber");
-		 String premisesID = rs.getString("premisesID");
-		 
-
-		 // Add into the html table
-		 output += "<tr><td>" + accName + "</td>";
-		 output += "<td>" + accNumber + "</td>";
-		 output += "<td>" + premisesID + "</td>";
-		 
-		 // buttons
-//		 output += "<td><input name='btnViewPay' type='submit' value='View Payment Details'</td>"
-		 //+ "<td><form method='post'>"
-
-//		 output += "<td><input name='btnViewBill' type='submit' value='View Last Bill Details'</td>"
-//		 + "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
-//		 + "<td><input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'></td>"
-		 
-		 //+ "<input name='AccountNo' type='hidden' value='" + Account_number
-		 //+ "'>" 
-		 //+"</form>"
-//		 +"</td></tr>"; 
-		 }
-		 con.close();
-		 // Complete the html table
-		 output += "</table>";
-		 }
-		 catch (Exception e)
-		 {
-		 output = "Error while reading specific account.";
-		 System.err.println(e.getMessage());
-		 }
-		 return output; 
-		 }
 }
+	
+//	//read a specific account
+//		public String viewSpecificAccount(String AccountNo)
+//		 {
+//		 String output = "";
+//		 try
+//		 {
+//		 Connection con = connect();
+//		 if (con == null)
+//		 {return "Error while connecting to the database for reading."; }
+//		 
+//		 // Prepare the html table to be displayed
+//		 output = "<table border='1'><tr><th>Account Name</th><th>Account Number</th>" +
+//		 "<th>Premises ID</th>" ;
+//		
+//
+//		 
+//
+//		 String query = "select * from electricity_account where accNumber='8865567800'";
+//		 
+//		 Statement stmt = con.createStatement();
+//		 ResultSet rs = stmt.executeQuery(query);
+//		 
+//		 // iterate through the rows in the result set
+//		 while (rs.next())
+//		 {
+//		 //String Account_number = Integer.toString(rs.getInt("accNumber"));
+//		 String accName = rs.getString("accName");
+//	     String accNumber = rs.getString("accNumber");
+//		 String premisesID = rs.getString("premisesID");
+//		 
+//
+//		 // Add into the html table
+//		 output += "<tr><td>" + accName + "</td>";
+//		 output += "<td>" + accNumber + "</td>";
+//		 output += "<td>" + premisesID + "</td>";
+//		 
+//
+//		 }
+//		 con.close();
+//		 // Complete the html table
+//		 output += "</table>";
+//		 }
+//		 catch (Exception e)
+//		 {
+//		 output = "Error while reading specific account.";
+//		 System.err.println(e.getMessage());
+//		 }
+//		 return output; 
+//		 }
+//}
