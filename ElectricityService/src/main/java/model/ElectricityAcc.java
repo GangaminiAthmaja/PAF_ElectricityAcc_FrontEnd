@@ -87,9 +87,9 @@ public class ElectricityAcc { // A common method to connect to the DB
 
 				// buttons
 				output += "<td><input name='btnUpdate' type='button' value='Update' "
-						+ "class='btnUpdate btn btn-secondary' data-accountID='" + accountID + "'></td>"
+						+ "class='btnUpdate btn btn-secondary' data-accountid='" + accountID + "'></td>"
 						+ "<td><input name='btnRemove' type='button' value='Remove' "
-						+ "class='btnRemove btn btn-danger' data-accountID='" + accountID + "'></td></tr>"; 
+						+ "class='btnRemove btn btn-danger' data-accountid='" + accountID + "'></td></tr>"; 
 						 } 
 						
 			con.close();
@@ -133,9 +133,9 @@ public class ElectricityAcc { // A common method to connect to the DB
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
-			String newAccounts = viewAccount(); 
+			String newItems = viewAccount(); 
 			 output = "{\"status\":\"success\", \"data\": \"" + 
-			 newAccounts + "\"}"; 
+					 newItems + "\"}"; 
 			
 		} catch (Exception e) {
 			output = "{\"status\":\"error\", \"data\": \"Error while updating the account.\"}"; 
@@ -164,9 +164,9 @@ public class ElectricityAcc { // A common method to connect to the DB
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
-			String newAccounts = viewAccount(); 
+			String newItems = viewAccount(); 
 			 output = "{\"status\":\"success\", \"data\": \"" + 
-			newAccounts + "\"}"; 
+					 newItems + "\"}"; 
 			
 		} catch (Exception e) {
 			output = "{\"status\":\"error\", \"data\": \"Error while deleting the account.\"}"; 

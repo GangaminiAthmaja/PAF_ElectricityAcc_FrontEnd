@@ -60,7 +60,7 @@ $("#formItem")[0].reset();
 // UPDATE==========================================
 $(document).on("click", ".btnUpdate", function(event)
 		{ 
-		$("#hidItemIDSave").val($(this).data("accountID")); 
+		$("#hidItemIDSave").val($(this).data("accountid")); 
 		 $("#accName").val($(this).closest("tr").find('td:eq(0)').text()); 
 		 $("#accNumber").val($(this).closest("tr").find('td:eq(1)').text()); 
 		 $("#premisesID").val($(this).closest("tr").find('td:eq(2)').text()); 
@@ -76,7 +76,7 @@ $(document).on("click", ".btnRemove", function(event)
 		 { 
 		 url : "ElectricityAccAPI", 
 		 type : "DELETE", 
-		 data : "accountID=" + $(this).data("accountID"),
+		 data : "accountID=" + $(this).data("accountid"),
 		 dataType : "text", 
 		 complete : function(response, status) 
 		 { 
@@ -84,8 +84,7 @@ $(document).on("click", ".btnRemove", function(event)
 		 } 
 		 }); 
 		});
-		
-function onItemDeleteComplete(response, status)
+	function onItemDeleteComplete(response, status)
 { 
 if (status == "success") 
  { 
@@ -110,6 +109,7 @@ if (status == "success")
  $("#alertError").show(); 
  } 
 }
+		
 
 
 // CLIENT-MODEL================================================================

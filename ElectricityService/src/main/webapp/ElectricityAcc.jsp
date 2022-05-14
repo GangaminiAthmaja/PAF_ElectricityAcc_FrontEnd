@@ -2,40 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-  <%
-	// SAVE
-	if (request.getParameter("accName") != null) {	
-		
-		ElectricityAcc account = new ElectricityAcc();
-		String stsMsg = "";
-		
-		
-		//Insert--------------------------
-		if (request.getParameter("hidItemIDSave") == "") 
-		 { 
-			stsMsg = account.createAccount(request.getParameter("accName"), 
-		 request.getParameter("accNumber"), 
-		 request.getParameter("premisesID")); 
-		 
-		 } 
-		else//Update----------------------
-		 { 
-			stsMsg = account.updateAccount(request.getParameter("hidItemIDSave"), 
-		 request.getParameter("accName"), 
-		 request.getParameter("accNumber"), 
-		 request.getParameter("premisesID"));
-		
-		 } 
-		 session.setAttribute("statusMsg", stsMsg); 
-		} 
-		//Delete-----------------------------
-		if (request.getParameter("hidItemIDDelete") != null) 
-		{ 
-			ElectricityAcc account = new ElectricityAcc();
-		 String stsMsg = account.deleteAccount(request.getParameter("hidItemIDDelete")); 
-		 session.setAttribute("statusMsg", stsMsg); 	
-		}
-%>  
     
     
 
