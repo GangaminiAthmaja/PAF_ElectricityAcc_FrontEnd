@@ -62,8 +62,8 @@ public class ElectricityAcc { // A common method to connect to the DB
 			}
 
 			// Prepare the html table to be displayed
-			output = "<table border='1'><tr><th>Account Name</th><th>Account Number</th>" + "<th>Premises ID</th>"
-					+ "<th>Update</th><th>Remove</th></tr>";
+			output = "<table border='1'align='center' ><tr><th >&nbsp;&nbsp;&nbsp; Account Name &nbsp;&nbsp;&nbsp;</th><th>&nbsp;&nbsp;&nbsp;Account Number&nbsp;&nbsp;&nbsp;</th>" + "<th>&nbsp;&nbsp;&nbsp;Premises ID&nbsp;&nbsp;&nbsp;</th>"
+					+ "<th >&nbsp;&nbsp;&nbsp;&nbsp;Update&nbsp;&nbsp;&nbsp;&nbsp;</th><th> &nbsp;&nbsp;&nbsp;&nbsp; Remove &nbsp;&nbsp;&nbsp;&nbsp;</th></tr>";
 
 			String query = "select * from electricity_account";
 			Statement stmt = con.createStatement();
@@ -82,10 +82,10 @@ public class ElectricityAcc { // A common method to connect to the DB
 				output += "<td>" + premisesID + "</td>";
 
 				// buttons
-				output += "<td><input name='btnUpdate' type='button' value='Update' "
-						+ "class='btnUpdate btn btn-secondary' data-accountid='" + accountID + "'></td>"
-						+ "<td><input name='btnRemove' type='button' value='Remove' "
-						+ "class='btnRemove btn btn-danger' data-accountid='" + accountID + "'></td></tr>";
+				output += "<td>&nbsp;&nbsp;&nbsp;&nbsp;<input name='btnUpdate' type='button' value='Update' "
+						+ "class='btnUpdate btn btn-secondary' data-accountid='" + accountID + "'>&nbsp;&nbsp;&nbsp;&nbsp;</td>"
+						+ "<td>&nbsp;&nbsp;&nbsp;&nbsp;<input name='btnRemove' type='button' value='Remove' "
+						+ "class='btnRemove btn btn-danger' data-accountid='" + accountID + "'>&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>";
 			}
 
 			con.close();
