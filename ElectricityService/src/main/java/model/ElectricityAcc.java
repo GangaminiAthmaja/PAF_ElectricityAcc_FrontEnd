@@ -10,17 +10,15 @@ public class ElectricityAcc { // A common method to connect to the DB
 
 			// Provide the correct details: DBServer/DBName, username, password
 			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/paf", "root", "");
-		} catch (Exception e) 
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return con;
 	}
 
-	//Create electricity Account
-	
-	public String createAccount(String accName, String accNumber, String premisesID) 
-	{
+	// Create electricity Account
+
+	public String createAccount(String accName, String accNumber, String premisesID) {
 		String output = "";
 		try {
 			Connection con = connect();
@@ -30,33 +28,31 @@ public class ElectricityAcc { // A common method to connect to the DB
 			// create a prepared statement
 			String query = " insert into electricity_account (`accName`,`accNumber`,`premisesID`)"
 					+ " values (?, ?, ?)";
-			
+
 			PreparedStatement preparedStmt = con.prepareStatement(query);
-			
+
 			// binding values
 //			preparedStmt.setInt(1, 0);
 			preparedStmt.setString(1, accName);
 			preparedStmt.setString(2, accNumber);
 			preparedStmt.setString(3, premisesID);
-			
+
 			// execute the statement
 
-			preparedStmt.execute(); 
-			 con.close(); 
-			 String newAccounts = viewAccount(); 
-			 output = "{\"status\":\"success\", \"data\": \"" + 
-			 newAccounts + "\"}"; 
-			
+			preparedStmt.execute();
+			con.close();
+			String newAccounts = viewAccount();
+			output = "{\"status\":\"success\", \"data\": \"" + newAccounts + "\"}";
+
 		} catch (Exception e) {
-			output = "{\"status\":\"error\", \"data\": \"Error while creating the account.\"}"; 
-			 System.err.println(e.getMessage());
+			output = "{\"status\":\"error\", \"data\": \"Error while creating the account.\"}";
+			System.err.println(e.getMessage());
 		}
 		return output;
 	}
 
-	
-	//View electricity Account
-	
+	// View electricity Account
+
 	public String viewAccount() {
 		String output = "";
 		try {
@@ -64,7 +60,7 @@ public class ElectricityAcc { // A common method to connect to the DB
 			if (con == null) {
 				return "Error while connecting to the database for reading.";
 			}
-			
+
 			// Prepare the html table to be displayed
 			output = "<table border='1'><tr><th>Account Name</th><th>Account Number</th>" + "<th>Premises ID</th>"
 					+ "<th>Update</th><th>Remove</th></tr>";
@@ -72,16 +68,16 @@ public class ElectricityAcc { // A common method to connect to the DB
 			String query = "select * from electricity_account";
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
-			
+
 			// iterate through the rows in the result set
 			while (rs.next()) {
 				String accountID = Integer.toString(rs.getInt("accountID"));
 				String accName = rs.getString("accName");
 				String accNumber = rs.getString("accNumber");
 				String premisesID = rs.getString("premisesID");
-				
+
 				// Add into the html table
-				output +="<tr><td>" + accName + "</td>";
+				output += "<tr><td>" + accName + "</td>";
 				output += "<td>" + accNumber + "</td>";
 				output += "<td>" + premisesID + "</td>";
 
@@ -89,14 +85,14 @@ public class ElectricityAcc { // A common method to connect to the DB
 				output += "<td><input name='btnUpdate' type='button' value='Update' "
 						+ "class='btnUpdate btn btn-secondary' data-accountid='" + accountID + "'></td>"
 						+ "<td><input name='btnRemove' type='button' value='Remove' "
-						+ "class='btnRemove btn btn-danger' data-accountid='" + accountID + "'></td></tr>"; 
-						 } 
-						
+						+ "class='btnRemove btn btn-danger' data-accountid='" + accountID + "'></td></tr>";
+			}
+
 			con.close();
-			
+
 			// Complete the html table
 			output += "</table>";
-			
+
 //			output += "<form> <input name='can' type='submit' value='Remove'class='btn btn-danger'>"
 //					+ "<input name='btnRemove' type='submit' value='Remove'class='btn btn-danger'>"
 //					+ "<input name='btnRemove' type='submit' value='Remove'class='btn btn-danger'></form>";
@@ -108,9 +104,8 @@ public class ElectricityAcc { // A common method to connect to the DB
 		return output;
 	}
 
-	
-	//Update electricity Account
-	
+	// Update electricity Account
+
 	public String updateAccount(String accountID, String accName, String accNumber, String premisesID)
 
 	{
@@ -123,30 +118,28 @@ public class ElectricityAcc { // A common method to connect to the DB
 			// create a prepared statement
 			String query = "UPDATE electricity_account SET accName=?,accNumber=?,premisesID=? WHERE accountID=?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
-			
+
 			// binding values
 			preparedStmt.setString(1, accName);
 			preparedStmt.setString(2, accNumber);
 			preparedStmt.setString(3, premisesID);
 			preparedStmt.setInt(4, Integer.parseInt(accountID));
-			
+
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
-			String newItems = viewAccount(); 
-			 output = "{\"status\":\"success\", \"data\": \"" + 
-					 newItems + "\"}"; 
-			
+			String newItems = viewAccount();
+			output = "{\"status\":\"success\", \"data\": \"" + newItems + "\"}";
+
 		} catch (Exception e) {
-			output = "{\"status\":\"error\", \"data\": \"Error while updating the account.\"}"; 
-			 System.err.println(e.getMessage()); 
+			output = "{\"status\":\"error\", \"data\": \"Error while updating the account.\"}";
+			System.err.println(e.getMessage());
 		}
 		return output;
 	}
 
+	// Delete electricity Account
 
-	//Delete electricity Account
-	
 	public String deleteAccount(String accountID) {
 		String output = "";
 		try {
@@ -154,28 +147,27 @@ public class ElectricityAcc { // A common method to connect to the DB
 			if (con == null) {
 				return "Error while connecting to the database for deleting.";
 			}
-			
+
 			// create a prepared statement
 			String query = "delete from electricity_account where accountID=?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
-			
+
 			preparedStmt.setInt(1, Integer.parseInt(accountID));
-			
+
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
-			String newItems = viewAccount(); 
-			 output = "{\"status\":\"success\", \"data\": \"" + 
-					 newItems + "\"}"; 
-			
+			String newItems = viewAccount();
+			output = "{\"status\":\"success\", \"data\": \"" + newItems + "\"}";
+
 		} catch (Exception e) {
-			output = "{\"status\":\"error\", \"data\": \"Error while deleting the account.\"}"; 
-			 System.err.println(e.getMessage());
+			output = "{\"status\":\"error\", \"data\": \"Error while deleting the account.\"}";
+			System.err.println(e.getMessage());
 		}
 		return output;
 	}
 }
-	
+
 //	//read a specific account
 //		public String viewSpecificAccount(String AccountNo)
 //		 {
